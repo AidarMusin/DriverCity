@@ -1,76 +1,108 @@
-<%@ page import="musin.aidar.DriverCity.setingsPJ.UserPJ" %>
+<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>FIND in DB</title>
     <style>
-        p {
-            font-size: 14pt;
-            font-family: Verdana;
-            font-weight: bold;
+        .all-div {
+            font-size: 16px;
             color: #293f62;
-            text-align: center;
-            line-height: 150%;
-        }
-        .input-field {
+            text-align: left;
             margin-left: 60px;
+            margin-top: 15px;
+            margin-bottom: 20px;
         }
-        .text-input-field {
-            font-size: 14px;
+
+        .left-profile {
+            font-size: 12pt;
+            font-family: Verdana;
+            color: #3DDB96;
+            line-height: 50%;
+            margin-bottom: 40px;
+        }
+
+        .input-field {
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .left-profile-text {
+            margin-bottom: 20px;
             font-weight: bold;
-            color: #293f62;
-            margin-left: 5px;
+        }
+
+        .text-input-field {
+            font-weight: bold;
         }
     </style>
-    <body>
+</head>
+<body>
+<div class="all-div">
+    <br/><br/><br/>
+    <span class="left-profile">
+        <%
+            UserProject userProject = (UserProject) session.getAttribute("userProject");
+            if (userProject == null) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                String userName = userProject.getUserName();
+                out.println("Пользователь: " + userName);
+            }
+        %>
+    </span>
+    <form method="post" action="/ServletBy">
+        <div class="left-profile">
+            <button> Выход</button>
+            <%
+                //                    if(session.getAttribute("userProject") != null) {
+//                        session.getServletContext().getRequestDispatcher("/ServletBy").forward(request,response);
+//                    }
+            %>
+        </div>
+    </form>
 
-        <br/>
-        <br/>
-        <br/>
-        <span>
-            <%@ page import="musin.aidar.DriverCity.setingsPJ.UserPJ" %>
-            <p>
-                <%
-                    UserPJ userPJ = (UserPJ) session.getAttribute("user");
-                    String userName = userPJ.getUserName();
-                    out.println("Hello " + userName + "!");
-                %>
-            </p>
-        </span>
+    <form method="post" id="checkedForm" action="/find">
+        <span class="left-profile-text"> Введите критерии поиска: </span> <br/><br/>
+        <div class="input-field">
+            <div class="input-field"><input type="text" id="field" name="surname" placeholder="Фамилия"> <span
+                    class="text-input-field">Фамилия</span><br/></div>
+            <div class="input-field"><input type="text" id="field" name="name" placeholder="Имя"> <span
+                    class="text-input-field">Имя</span><br/></div>
+            <div class="input-field"><input type="text" id="field" name="patronymic" placeholder="Отчество"> <span
+                    class="text-input-field">Отчество</span><br/></div>
+            <div class="input-field"><input type="text" id="field" name="city" placeholder="Город"> <span
+                    class="text-input-field">Город проживания</span><br/></div>
+            <div class="input-field"><input type="text" id="field" name="car" placeholder="Марка"> <span
+                    class="text-input-field">Марка автомобиля</span><br/></div>
+            <div class="input-field">
+                <button> FIND</button>
+            </div>
+        </div>
+    </form>
 
-        <form action="/find">
-                <span>
-                    <p> Please, input data </p>
-                </span>
-            <div class="input-field">
-                <input type="text" name="surname" placeholder="Фамилия"> <span class="text-input-field">Фамилия</span>
-            </div>
-            <br/>
-            <div class="input-field">
-                <input type="text" name="name" placeholder="Имя"> <span class="text-input-field">Имя</span>
-            </div>
-            <br/>
-            <div class="input-field">
-                <input type="text" name="patronymic" placeholder="Отчество"> <span class="text-input-field">Отчество</span>
-            </div>
-            <br/>
-            <div class="input-field">
-                <input type="text" name="city" placeholder="Город"> <span class="text-input-field">Город проживания</span>
-            </div>
-            <br/>
-            <div class="input-field">
-                <input type="text" name="car" placeholder="Марка"> <span class="text-input-field">Марка автомобиля</span>
-            </div>
-            <br/>
-            <br>
-            <div class="input-field">
-                <button class="login100-form-btn"> FIND </button>
-            </div>
-        </form>
+</div>
 
-    <%
-        out.println();
-    %>
-    </body>
+<script>
+    function checkField() {
+        const fileds = document.querySelectorAll('#field');
+        let isNull = false;
+        fileds.forEach(item => {
+            if (item.value)
+                isNull = true;
+        })
+
+        if (!isNull)
+            alert('Заполните хотя бы одно из полей!');
+    }
+
+    const checkedForm = document.querySelector('#checkedForm');
+    checkedForm.addEventListener('submit', checkField);
+</script>
+
+
+</body>
 </html>

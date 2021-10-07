@@ -1,7 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="musin.aidar.DriverCity.connetDB.SearchUserInDB" %>
-<%@ page import="musin.aidar.DriverCity.setingsPJ.UserPJ" %>
-<%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.lang.String" %>
 
 <!doctype html>
@@ -15,6 +12,7 @@
         text-align: center;
         line-height: 150%;
     }
+
     .error-user {
         font-size: 12pt;
         font-family: Verdana;
@@ -23,58 +21,57 @@
         text-align: center;
         line-height: 150%;
     }
+
+    .field_av {
+        margin: 5px 5px 5px 5px;
+    }
 </style>
 <head>
     <title>FIND</title>
 </head>
+<body>
+<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%
+    UserProject userProject = (UserProject) session.getAttribute("userProject");
+    if (userProject != null) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");
+        dispatcher.forward(request, response);
+    }
+%>
 
-    <body>
-    <%@ page import="javax.servlet.RequestDispatcher" %>
-
-    <%
-
-    %>
-        <br/>
-        <div style="text-align: center">
-            <br>
-            <br>
-            <form method="POST" action="/user-search">
-                <span>
-                    <p> Please, input user name and password </p>
-                </span>
-                <div>
-                    <input type="text" name="login" placeholder="userLogin">
-                </div>
-                <br/>
-                <div >
-                    <input type="password" name="pass" placeholder="userPass">
-                </div>
-                <br/>
-                <div>
-                    <div>
-                        <input id="ckb" type="checkbox" name="remember-me">
-                        <label> Remember me </label>
-                    </div>
-                </div>
-                <div>
-                    <p><button> Login </button></p>
-                </div>
-            </form>
-            <span class="error-user">
-                <%
-                    String login = request.getParameter("login");
-                    if (!(login == null) && !(login.equals(""))) {
-                        out.println(login + " - invalid username and password, please try again");
-                    }
-                %>
-                <script>
-                    function reset(){
-                        document.getElementById('login').value="";
-                    }
-                </script>
+<br/>
+<div style="text-align: center">
+    <br>
+    <br>
+    <form method="POST" action="/user-search" id="checkedForm">
+            <span>
+                <p> Please, input user name and password </p>
             </span>
+        <input class="field_av" type="text" id="field_l" name="login" placeholder="userLogin">
+        <br/>
+        <input class="field_av" type="password" id="field_p" name="pass" placeholder="userPass">
+        <br/>
+        <div>
+            <input id="ckb" type="checkbox" name="remember-me">
+            <label> Remember me </label>
         </div>
-    </body>
+        <div>
+            <p>
+                <button> Login</button>
+            </p>
+        </div>
+    </form>
+
+    <span class="error-user">
+            <%
+                String login = request.getParameter("login");
+                if (!(login == null) && !(login.equals(""))) {
+                    out.println("Invalid username and password, please try again");
+                }
+            %>
+        </span>
+</div>
+</body>
 
 </html>
 

@@ -2,14 +2,14 @@ package musin.aidar.DriverCity.setingsPJ;
 
 import java.util.ArrayList;
 
-public class People {
-    private String surname;
-    private String name;
-    private String patronymic;
-    private String city;
-    private ArrayList<String> cars;
+public class Person {
+    private final String surname;
+    private final String name;
+    private final String patronymic;
+    private final String city;
+    private final ArrayList<String> cars;
 
-    public People (String surname, String name, String patronymic, String city, ArrayList<String> cars) {
+    public Person(String surname, String name, String patronymic, String city, ArrayList<String> cars) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;

@@ -3,18 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
-        <servlet-name>ServletValidationCookies</servlet-name>
-        <servlet-class>musin.aidar.DriverCity.ServletValidationCookies</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ServletValidationCookies</servlet-name>
-        <url-pattern>/servlet-validation</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchUserInDBServlet</servlet-name>
-        <servlet-class>musin.aidar.DriverCity.SearchUserInDBServlet</servlet-class>
+        <servlet-class>musin.aidar.DriverCity.authorization.SearchUserInDBServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchUserInDBServlet</servlet-name>
@@ -30,7 +22,7 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>userspage.jsp</welcome-file>
+        <welcome-file>homepage.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

@@ -1,6 +1,6 @@
 package musin.aidar.DriverCity.connetDB;
 
-import musin.aidar.DriverCity.setingsPJ.People;
+import musin.aidar.DriverCity.setingsPJ.Person;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
 
 public class FindPerson {
 
-    public ArrayList<People> findPerson(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException {
-        ArrayList<People> peopleList = new ArrayList<People>();
+    public ArrayList<Person> findPerson(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException {
+        ArrayList<Person> personList = new ArrayList<Person>();
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
@@ -38,7 +38,7 @@ public class FindPerson {
                 boolean flag = true;
                 ArrayList<String> cars = new ArrayList<>();
 
-                for (People pl : peopleList) {
+                for (Person pl : personList) {
                     if (pl.getSurname().equals(surnamePeople) && pl.getName().equals(namePeople) && pl.getPatronymic().equals(patrPeople)) {
                         pl.addCar(carPeople);
                         flag = false;
@@ -47,7 +47,7 @@ public class FindPerson {
                 }
                 if (flag) {
                     cars.add(carPeople);
-                    peopleList.add(new People(surnamePeople, namePeople, patrPeople, cityPeople, cars));
+                    personList.add(new Person(surnamePeople, namePeople, patrPeople, cityPeople, cars));
                 }
             }
 
@@ -55,6 +55,6 @@ public class FindPerson {
             sqlException.printStackTrace();
         }
 
-        return peopleList;
+        return personList;
     }
 }
