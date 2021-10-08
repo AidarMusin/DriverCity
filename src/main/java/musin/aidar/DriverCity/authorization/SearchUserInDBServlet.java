@@ -21,38 +21,46 @@ public class SearchUserInDBServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         HttpSession session = request.getSession();
 
         //String rememberMe = request.getParameter("remember-me");
 
-        int idUserProject = 0;
 
         UserProject userProject = (UserProject) session.getAttribute("userProject");
 
-
         if (userProject == null) {
-            userProject = new UserProject(request.getParameter("login"), request.getParameter("pass"));
-        }
+            SearchUserInDB searchUserInDB = new SearchUserInDB();
+            boolean checkUserProject = false;
+            String userProjectName = request.getParameter("login");
+            String userProjectPass = request.getParameter("pass");
 
 
-        SearchUserInDB searchUserInDB = new SearchUserInDB();
 
-        try {
-            idUserProject = searchUserInDB.findUserId(userProject);
+            try {
+                checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
-            if (idUserProject != 0) {
-                userProject.setUserProjectId(idUserProject);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-                session.setAttribute("userProject", userProject);
-                getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
 
+            if (checkUserProject) {
+                try {
+                    userProject = new UserProject(userProjectName, userProjectPass);
+                    userProject.setUserProjectId(searchUserInDB.findUserId(userProjectName, userProjectPass));
+
+                    session.setAttribute("userProject", userProject);
+
+                    getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
+
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
             }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } else {
+            getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
         }
     }
 

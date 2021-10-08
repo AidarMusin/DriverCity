@@ -1,6 +1,7 @@
 <%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%@ page import="java.lang.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,19 +50,15 @@
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
                 dispatcher.forward(request, response);
             } else {
-                String userName = userProject.getUserName();
-                out.println("Пользователь: " + userName);
+                out.println("Пользователь: " + userProject.getUserName());
+                out.println("Идентификатор: №" + userProject.getUserProjectId());
             }
         %>
     </span>
+
     <form method="post" action="/ServletBy">
         <div class="left-profile">
             <button> Выход</button>
-            <%
-                //                    if(session.getAttribute("userProject") != null) {
-//                        session.getServletContext().getRequestDispatcher("/ServletBy").forward(request,response);
-//                    }
-            %>
         </div>
     </form>
 

@@ -9,28 +9,29 @@ import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
 
 public class FindPerson {
 
-    public ArrayList<Person> findPerson(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException {
+    public ArrayList<Person> findPersonInDB(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException {
         ArrayList<Person> personList = new ArrayList<Person>();
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
             Statement statement = connection.createStatement();
 
-            String query = "  SELECT surname, name, patronymic, city_name, car_name" +
+            String query = "SELECT surname, name_pers, patronymic, city_name, car_name" +
                     " FROM ((persons p INNER JOIN personcar pc ON p.id = pc.pers_id)" +
                     " INNER JOIN car c ON pc.cars_id = c.car_id)" +
                     " INNER JOIN city ON p.id_city = city.city_id" +
                     " WHERE surname LIKE '" + surname + "' AND" +
-                    " name LIKE '" + name + "' AND" +
+                    " name_pers LIKE '" + name + "' AND" +
                     " patronymic LIKE '" + patronymic + "' AND" +
                     " city_name LIKE '" + city + "' AND" +
                     " car_name LIKE '" + car + "';  ";
+
 
             ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
                 String surnamePeople = rs.getString("surname");
-                String namePeople = rs.getString("name");
+                String namePeople = rs.getString("name_pers");
                 String patrPeople = rs.getString("patronymic");
                 String cityPeople = rs.getString("city_name");
                 String carPeople = rs.getString("car_name");

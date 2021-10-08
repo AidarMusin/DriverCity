@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:mysql://localhost:3306/find_person</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="FTlIGzTWEp@remotemysql.com" uuid="c1dddfe0-f26b-4044-bcd7-512e81e2efbe">
+    <data-source source="LOCAL" name="FTlIGzTWEp@remotemysql.com" uuid="35832fee-62a2-42bd-b447-f91b9b145751">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

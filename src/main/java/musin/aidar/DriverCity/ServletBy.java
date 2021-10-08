@@ -17,8 +17,15 @@ public class ServletBy extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HttpSession session = request.getSession();
-        session.invalidate();
-        getServletContext().getRequestDispatcher("/by.jsp").forward(request, response);
+        if (session.getAttribute("userProject") != null) {
+
+            session.invalidate();
+            getServletContext().getRequestDispatcher("/by.jsp").forward(request, response);
+        }
+        else {
+            getServletContext().getRequestDispatcher("/userspage.jsp");
+        }
     }
 }

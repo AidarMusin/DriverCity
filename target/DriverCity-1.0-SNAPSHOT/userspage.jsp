@@ -12,6 +12,7 @@
         text-align: center;
         line-height: 150%;
     }
+
     .error-user {
         font-size: 12pt;
         font-family: Verdana;
@@ -20,6 +21,7 @@
         text-align: center;
         line-height: 150%;
     }
+
     .field_av {
         margin: 5px 5px 5px 5px;
     }
@@ -28,37 +30,39 @@
     <title>FIND</title>
 </head>
 <body>
-    <%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
-    <%
-        UserProject userProject = (UserProject) session.getAttribute("userProject");
-        if (userProject != null) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");
-            dispatcher.forward(request,response);
-        }
-    %>
+<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%
+    UserProject userProject = (UserProject) session.getAttribute("userProject");
+    if (userProject != null) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");
+        dispatcher.forward(request, response);
+    }
+%>
 
 <br/>
-    <div style="text-align: center">
-        <br>
-        <br>
-        <form method="POST" action="/user-search" id="checkedForm">
+<div style="text-align: center">
+    <br>
+    <br>
+    <form method="POST" action="/user-search" id="checkedForm">
             <span>
                 <p> Please, input user name and password </p>
             </span>
-                <input class="field_av" type="text" id="field_l" name="login" placeholder="userLogin">
-            <br/>
-                <input class="field_av"  type="password"  id="field_p" name="pass" placeholder="userPass">
-            <br/>
-                <div>
-                    <input id="ckb" type="checkbox" name="remember-me">
-                    <label> Remember me </label>
-                </div>
-            <div>
-                <p><button> Login </button></p>
-            </div>
-        </form>
+        <input class="field_av" type="text" id="field_l" name="login" placeholder="userLogin">
+        <br/>
+        <input class="field_av" type="password" id="field_p" name="pass" placeholder="userPass">
+        <br/>
+        <div>
+            <input id="ckb" type="checkbox" name="remember-me">
+            <label> Remember me </label>
+        </div>
+        <div>
+            <p>
+                <button> Login</button>
+            </p>
+        </div>
+    </form>
 
-        <span class="error-user">
+    <span class="error-user">
             <%
                 String login = request.getParameter("login");
                 if (!(login == null) && !(login.equals(""))) {
@@ -66,7 +70,7 @@
                 }
             %>
         </span>
-    </div>
+</div>
 </body>
 
 </html>

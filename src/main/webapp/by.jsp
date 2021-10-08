@@ -12,15 +12,16 @@
     <p>
     <h1 style="text-align: center">
 
-        <%
-            out.println("До новых встреч");
-            Thread.sleep(2000);
-            out.println("До новых встреч");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");
-            dispatcher.forward(request, response);
-        %>
+        <%= "До новых встреч"    %>
     </h1>
+
+    <form method="post" action="/homepage.jsp">
+        <div style="text-align: center">
+            <button> Пока </button>
+        </div>
+
     </p>
+    </form>
 </head>
 <body>
 
