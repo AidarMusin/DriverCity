@@ -1,0 +1,10 @@
+
+Username: FTlIGzTWEp
+
+Database name: FTlIGzTWEp
+
+Password: qmhs6Ylyb5
+
+Server: remotemysql.com
+
+Port: 3306
