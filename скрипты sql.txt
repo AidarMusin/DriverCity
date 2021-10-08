@@ -1,0 +1,85 @@
+CREATE TABLE user (id INT NOT NULL, login VARCHAR(10) NOT NULL, password VARCHAR(10), CONSTRAINT user_pk PRIMARY KEY (id));
+CREATE TABLE persons (id INT NOT NULL, surname VARCHAR(10) NOT NULL, user_pers VARCHAR(10), patronymic VARCHAR(15) NOT NULL, id_city NOT NULL, constraint person_pk  primary key (id));
+CREATE TABLE car (car_id INT NOT NULL, car_name VARCHAR(10) NOT NULL, CONSTRAINT car_pk PRIMARY KEY (car_id));
+CREATE TABLE city (city_id INT NOT NULL, city_name VARCHAR(10) NOT NULL, CONSTRAINT city_pk PRIMARY KEY (city_id));
+CREATE TABLE personscar (pers_id INT NOT NULL, cars_id INT NOT NULL);
+CREATE TABLE personscar (pers_id INT NOT NULL, cars_id INT NOT NULL);
+
+ALTER TABLE city modify city_id int auto_increment;
+ALTER TABLE car modify car_id int auto_increment;
+
+
+ALTER TABLE persons ADD CONSTRAINT persons_city_city_id_fk  FOREIGN KEY (id) REFERENCES city (city_id);
+ALTER TABLE personscar ADD CONSTRAINT personscar_persons_id_fk FOREIGN KEY (pers_id) REFERENCES persons (id);
+ALTER TABLE personscar ADD CONSTRAINT personscat_car_id_fk FOREIGN KEY (cars_id) REFERENCES car (car_id);
+
+
+INSERT INTO car (car_name) VALUE ('BMV');
+INSERT INTO car (car_name) VALUE ('AUDI');
+INSERT INTO car (car_name) VALUE ('Kia');
+INSERT INTO car (car_name) VALUE ('Toyota');
+INSERT INTO car (car_name) VALUE ('Honda');
+INSERT INTO car (car_name) VALUE ('Skoda');
+INSERT INTO car (car_name) VALUE ('LADA');
+INSERT INTO city (city_name) VALUE ('Ufa');
+INSERT INTO city (city_name) VALUE ('Moskva');
+INSERT INTO city (city_name) VALUE ('Samara');
+INSERT INTO city (city_name) VALUE ('Sochi');
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Мусин','Айдар','Филхатович', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Николаев','Вилен','Якунович', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Ермаков','Тимур','Семёнович', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Щербаков','Августин','Юрьевич', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Ермаков','Филипп','Аркадьевич', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Большаков','Валерий','Улебович', 1);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Николаев','Аким','Даниилович', 2);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Волков','Ростислав','Авдеевич', 2);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Николаев','Роман','Альвианович', 2);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Осипов','Матвей','Максович', 2);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Николаев','Устин','Глебович', 2);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Гущин','Климент','Алексеевич', 3);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Анисимов','Остап','Яковович', 3);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Фёдоров','Витольд','Васильевич', 4);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Фёдоров ','Мирослав','Владленович', 4);
+INSERT INTO persons (surname, name_pers, patronymic, id_city) VALUE ('Афанасьев','Модест','Евгеньевич', 4);
+INSERT INTO personscar (pers_id, cars_id) VALUE (1 , 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (1 , 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (2 , 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (3 , 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (4, 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (5 , 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (6 , 3);
+INSERT INTO personscar (pers_id, cars_id) VALUE (7 , 4);
+INSERT INTO personscar (pers_id, cars_id) VALUE (8 , 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (9 , 5);
+INSERT INTO personscar (pers_id, cars_id) VALUE (10 , 7);
+INSERT INTO personscar (pers_id, cars_id) VALUE (11, 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (12, 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (13, 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (14, 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (15, 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (16, 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (5, 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (6, 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (8,1 );
+INSERT INTO personscar (pers_id, cars_id) VALUE (8, 1);
+INSERT INTO personscar (pers_id, cars_id) VALUE (8, 2);
+INSERT INTO personscar (pers_id, cars_id) VALUE (8, 3);
+INSERT INTO personscar (pers_id, cars_id) VALUE (15, 6);
+INSERT INTO personscar (pers_id, cars_id) VALUE (11, 7);
+INSERT INTO personscar (pers_id, cars_id) VALUE (11, 7);
+INSERT INTO personscar (pers_id, cars_id) VALUE (12, 7);
+INSERT INTO personscar (pers_id, cars_id) VALUE (7, 7);
+
+
+SELECT surname, name_pers, patronymic, city_name, car_name
+FROM ((personss p INNER JOIN personscar pc ON p.id = pc.pers_id)
+    INNER JOIN car c ON pc.cars_id = c.car_id)
+    INNER JOIN city ON p.id_city = city.city_id
+WHERE city_name LIKE '%' AND name_pers LIKE '%'
+  AND patronymic LIKE '%'
+  AND surname LIKE '%' AND
+      car_name LIKE '%';
+	  
+	  
+	  
+	  
