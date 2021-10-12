@@ -25,8 +25,10 @@ public class FindPersonServlet extends HttpServlet {
         HttpSession session = request.getSession();
         PrintWriter pw = response.getWriter();
 
-        if (session.getAttribute("userProject") != null) {
+        if (session.getAttribute("userProject") == null) {
+            getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
 
+        } else {
 
             ArrayList<String> checkList = new ArrayList<>();
             String plug = "%";
@@ -71,15 +73,9 @@ public class FindPersonServlet extends HttpServlet {
                 pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>"   );
 
 
-
                 pw.println("<h3>" + p.getSurname() + " - " + p.getName() + " : " + p.getCity() + " " + " - " + p.getValueCars() + "</h3>");
                 pw.println("</div></body></html>" );
             }
-
-
-        } else {
-            getServletContext().getRequestDispatcher("/userspage.jsp");
         }
-
     }
 }

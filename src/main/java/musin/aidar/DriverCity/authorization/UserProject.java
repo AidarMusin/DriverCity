@@ -15,10 +15,6 @@ public class UserProject {
         return userProjectName;
     }
 
-    public String getUserProjectPass() {
-        return userProjectPass;
-    }
-
     public String getUserProjectId() {
         return userProjectId;
     }

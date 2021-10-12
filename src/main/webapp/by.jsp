@@ -13,14 +13,14 @@
     <h1 style="text-align: center">
 
         <%= "До новых встреч"    %>
-    </h1>
+</h1>
 
-    <form method="post" action="/homepage.jsp">
+    <form method="post" action="/userspage.jsp">
         <div style="text-align: center">
-            <button> Пока </button>
+            <button> Пока</button>
         </div>
 
-    </p>
+        </p>
     </form>
 </head>
 <body>

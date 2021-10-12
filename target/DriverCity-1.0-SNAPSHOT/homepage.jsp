@@ -46,12 +46,13 @@
     <span class="left-profile">
         <%
             UserProject userProject = (UserProject) session.getAttribute("userProject");
-            if (userProject == null) {
+
+            if (userProject == null)  {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
                 dispatcher.forward(request, response);
             } else {
                 out.println("Пользователь: " + userProject.getUserName());
-                out.println("Идентификатор: №" + userProject.getUserProjectId());
+                out.println("Идентификатор: " + userProject.getUserProjectId());
             }
         %>
     </span>

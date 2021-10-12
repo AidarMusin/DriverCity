@@ -13,18 +13,10 @@ import java.io.IOException;
 @WebServlet(name = "SearchUserInDBServlet", value = "/user-search")
 public class SearchUserInDBServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-        //String rememberMe = request.getParameter("remember-me");
-
 
         UserProject userProject = (UserProject) session.getAttribute("userProject");
 
@@ -35,17 +27,11 @@ public class SearchUserInDBServlet extends HttpServlet {
             String userProjectPass = request.getParameter("pass");
 
 
-
             try {
                 checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+                if (checkUserProject) {
 
-
-            if (checkUserProject) {
-                try {
                     userProject = new UserProject(userProjectName, userProjectPass);
                     userProject.setUserProjectId(searchUserInDB.findUserId(userProjectName, userProjectPass));
 
@@ -53,17 +39,23 @@ public class SearchUserInDBServlet extends HttpServlet {
 
                     getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
 
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                } else {
+                    String errorUser = "Invalid username and password, please try again";
+                    session.setAttribute("errorUser", errorUser);
+                    getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
                 }
-            } else {
-                getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+
+
         } else {
             getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
         }
     }
 
-    public void destroy() {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 }

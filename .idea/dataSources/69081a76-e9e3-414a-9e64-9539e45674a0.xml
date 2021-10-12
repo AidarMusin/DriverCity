@@ -922,7 +922,7 @@ SELECT|sys.sys_config
     <table id="288" parent="2" name="city"/>
     <table id="289" parent="2" name="personcar"/>
     <table id="290" parent="2" name="persons"/>
-    <table id="291" parent="2" name="user"/>
+    <table id="291" parent="2" name="user_project"/>
     <column id="292" parent="287" name="car_id">
       <Position>1</Position>
       <DataType>int|0s</DataType>

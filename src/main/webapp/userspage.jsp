@@ -31,13 +31,6 @@
 </head>
 <body>
 <%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
-<%
-    UserProject userProject = (UserProject) session.getAttribute("userProject");
-    if (userProject != null) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");
-        dispatcher.forward(request, response);
-    }
-%>
 
 <br/>
 <div style="text-align: center">
@@ -65,8 +58,10 @@
     <span class="error-user">
             <%
                 String login = request.getParameter("login");
-                if (!(login == null) && !(login.equals(""))) {
-                    out.println("Invalid username and password, please try again");
+                String errorUser = (String) session.getAttribute("errorUser");
+                if ((errorUser != null) || (login == null) || (login.equals(""))) {
+                    if (errorUser != null)
+                        out.println(errorUser);
                 }
             %>
         </span>

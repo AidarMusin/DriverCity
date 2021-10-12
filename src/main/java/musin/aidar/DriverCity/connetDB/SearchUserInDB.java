@@ -1,8 +1,9 @@
 package musin.aidar.DriverCity.connetDB;
 
-import musin.aidar.DriverCity.authorization.UserProject;
 import java.sql.*;
+
 import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
+
 
 public class SearchUserInDB {
 
@@ -11,11 +12,11 @@ public class SearchUserInDB {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, loginUser);
+            preparedStatement.setString(2, passUser);
 
-            ResultSet resultSet = statement.executeQuery("SELECT id FROM  user_project " +
-                    "WHERE login ='" + loginUser +
-                    "' AND password ='" + passUser + "';");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 resultsId = resultSet.getInt("id");
@@ -32,11 +33,11 @@ public class SearchUserInDB {
         boolean checkUserProject = false;
 
         try(Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-            Statement statement = connection.createStatement();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, loginUser);
+            preparedStatement.setString(2, passUser);
 
-            ResultSet resultSet = statement.executeQuery("SELECT id FROM  user_project " +
-                    "WHERE login ='" + loginUser +
-                    "' AND password ='" + passUser + "';");
+            ResultSet resultSet = preparedStatement.executeQuery();
             checkUserProject = resultSet.next();
 
         } catch (SQLException sqlException) {
