@@ -31,13 +31,6 @@
 </head>
 <body>
 <%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
-<%--<%--%>
-<%--    UserProject userProject = (UserProject) session.getAttribute("userProject");--%>
-<%--    if (userProject != null) {--%>
-<%--        RequestDispatcher dispatcher = request.getRequestDispatcher("/homepage.jsp");--%>
-<%--        dispatcher.forward(request, response);--%>
-<%--    }--%>
-<%--%>--%>
 
 <br/>
 <div style="text-align: center">

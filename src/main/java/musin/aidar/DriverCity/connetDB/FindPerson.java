@@ -14,20 +14,16 @@ public class FindPerson {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-            Statement statement = connection.createStatement();
 
-            String query = "SELECT surname, name_pers, patronymic, city_name, car_name" +
-                    " FROM ((persons p INNER JOIN personcar pc ON p.id = pc.pers_id)" +
-                    " INNER JOIN car c ON pc.cars_id = c.car_id)" +
-                    " INNER JOIN city ON p.id_city = city.city_id" +
-                    " WHERE surname LIKE '" + surname + "' AND" +
-                    " name_pers LIKE '" + name + "' AND" +
-                    " patronymic LIKE '" + patronymic + "' AND" +
-                    " city_name LIKE '" + city + "' AND" +
-                    " car_name LIKE '" + car + "';  ";
+            PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
+            preparedStatement.setString(1, surname);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, patronymic);
+            preparedStatement.setString(4, city);
+            preparedStatement.setString(5, car);
 
 
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 String surnamePeople = rs.getString("surname");
