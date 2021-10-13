@@ -3,7 +3,7 @@ package musin.aidar.DriverCity.authorization;
 public class UserProject {
     private final String userProjectName;
     private final String userProjectPass;
-    private String userProjectId;
+    private int userProjectId;
 
     public UserProject(String userName, String userProjectPass) {
         this.userProjectName = userName;
@@ -15,12 +15,12 @@ public class UserProject {
         return userProjectName;
     }
 
-    public String getUserProjectId() {
+    public int getUserProjectId() {
         return userProjectId;
     }
 
     public void setUserProjectId(int userProjectId) {
-        this.userProjectId = "" + userProjectId;
+        this.userProjectId = userProjectId;
     }
 }
 

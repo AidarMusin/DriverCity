@@ -8,7 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 @WebServlet(name = "SearchUserInDBServlet", value = "/user-search")
 public class SearchUserInDBServlet extends HttpServlet {
@@ -18,17 +24,25 @@ public class SearchUserInDBServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+
         UserProject userProject = (UserProject) session.getAttribute("userProject");
+        try {
+            if (userProject == null) {
 
-        if (userProject == null) {
-            SearchUserInDB searchUserInDB = new SearchUserInDB();
-            boolean checkUserProject = false;
-            String userProjectName = request.getParameter("login");
-            String userProjectPass = request.getParameter("pass");
+                Properties pr = new Properties();
+                File file = new File("setingsDB.properties");
 
+                FileInputStream fis = new FileInputStream(file);
+                pr.load(fis);
+                Class.forName(pr.getProperty("driverJdbs"));
 
-            try {
-                checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
+                Connection connection = DriverManager.getConnection(pr.getProperty("connectionUrl"), pr.getProperty("username"), pr.getProperty("password"));
+
+                SearchUserInDB searchUserInDB = new SearchUserInDB();
+                String userProjectName = request.getParameter("login");
+                String userProjectPass = request.getParameter("pass");
+
+                boolean checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
                 if (checkUserProject) {
 
@@ -45,13 +59,16 @@ public class SearchUserInDBServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
                 }
 
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            } else {
+                getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
 
-
-        } else {
-            getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
+        } catch (ClassNotFoundException e) {
+            //логирование
+            //какие еще может кинуть exception
+        } catch (SQLException sqlException) {
+            //логирование
+            //какие еще может кинуть exception
         }
     }
 

@@ -2,10 +2,13 @@ package musin.aidar.DriverCity.connetDB;
 
 import musin.aidar.DriverCity.setingsPJ.Person;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
+import static musin.aidar.DriverCity.connetDB.SetingsDB.getConn;
+import static musin.aidar.DriverCity.connetDB.SetingsDB.queryAll;
 
 public class FindPerson {
 
@@ -13,9 +16,9 @@ public class FindPerson {
         ArrayList<Person> personList = new ArrayList<Person>();
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
+        try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
+            PreparedStatement preparedStatement = getConn().prepareStatement(queryAll);
             preparedStatement.setString(1, surname);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, patronymic);
