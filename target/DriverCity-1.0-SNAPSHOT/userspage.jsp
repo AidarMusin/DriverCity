@@ -3,29 +3,7 @@
 
 <!doctype html>
 <html>
-<style>
-    p {
-        font-size: 14pt;
-        font-family: Verdana;
-        font-weight: bold;
-        color: #293f62;;
-        text-align: center;
-        line-height: 150%;
-    }
-
-    .error-user {
-        font-size: 12pt;
-        font-family: Verdana;
-        font-weight: bold;
-        color: #F96846;;
-        text-align: center;
-        line-height: 150%;
-    }
-
-    .field_av {
-        margin: 5px 5px 5px 5px;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="resources/mycss.css">
 <head>
     <title>FIND</title>
 </head>
