@@ -5,40 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<%--    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
+<%--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--%>
+<%--    <script src="ajax.js"></script>--%>
+
     <title>FIND in DB</title>
-    <style>
-        .all-div {
-            font-size: 16px;
-            color: #293f62;
-            text-align: left;
-            margin-left: 60px;
-            margin-top: 15px;
-            margin-bottom: 20px;
-        }
-
-        .left-profile {
-            font-size: 12pt;
-            font-family: Verdana;
-            color: #3DDB96;
-            line-height: 50%;
-            margin-bottom: 40px;
-        }
-
-        .input-field {
-            margin-bottom: 20px;
-            margin-top: 10px;
-        }
-
-        .left-profile-text {
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .text-input-field {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="resources/mycss.css">
 </head>
 <body>
 <div class="all-div">
@@ -47,7 +19,7 @@
         <%
             UserProject userProject = (UserProject) session.getAttribute("userProject");
 
-            if (userProject == null)  {
+            if (userProject == null) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
                 dispatcher.forward(request, response);
             } else {
@@ -76,31 +48,18 @@
                     class="text-input-field">Город проживания</span><br/></div>
             <div class="input-field"><input type="text" id="field" name="car" placeholder="Марка"> <span
                     class="text-input-field">Марка автомобиля</span><br/></div>
-            <div class="input-field">
-                <button> FIND</button>
+            <div class="input-field" >
+                <button id="btnsend"> FIND</button>
             </div>
         </div>
     </form>
 
 </div>
 
-<script>
-    function checkField() {
-        const fileds = document.querySelectorAll('#field');
-        let isNull = false;
-        fileds.forEach(item => {
-            if (item.value)
-                isNull = true;
-        })
 
-        if (!isNull)
-            alert('Заполните хотя бы одно из полей!');
-    }
+<div id="result_form"> </div>
 
-    const checkedForm = document.querySelector('#checkedForm');
-    checkedForm.addEventListener('submit', checkField);
-</script>
-
+<%--<script type="text/javascript" src="resources/myhandler.js"> </script>--%>
 
 </body>
 </html>
