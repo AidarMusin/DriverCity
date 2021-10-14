@@ -1,7 +1,8 @@
 package musin.aidar.DriverCity;
 
 import musin.aidar.DriverCity.connetDB.FindPerson;
-import musin.aidar.DriverCity.setingsPJ.Person;
+import musin.aidar.DriverCity.myObject.Car;
+import musin.aidar.DriverCity.myObject.Person;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 @WebServlet(name = "FindPersonServlet", value = "/find")
@@ -46,7 +49,7 @@ public class FindPersonServlet extends HttpServlet {
             checkList.add(city);
             checkList.add(car);
 
-            for (String str :  checkList) {
+            for (String str : checkList) {
                 if (!str.equals(plug)) {
                     checkVar = true;
                 }
@@ -57,11 +60,13 @@ public class FindPersonServlet extends HttpServlet {
             }
 
 
+            StringJoiner stringJoiner = new StringJoiner(",");
+
             FindPerson findPerson = new FindPerson();
-            ArrayList<Person> personList = null;
+            Map<Person, List<Car>> personMap = null;
             try {
                 personList = findPerson.findPersonInDB(surname, name, patronymic, city, car);
-                session.setAttribute("personList",personList);
+                session.setAttribute("personList", personList);
 
                 //getServletContext().getRequestDispatcher("/result.jsp").forward(request,response);
 
@@ -70,8 +75,6 @@ public class FindPersonServlet extends HttpServlet {
             } catch (SQLException sqlException) {
                 sqlException.printStackTrace();
             }
-
-
 
 
             for (Person p : personList ) {
