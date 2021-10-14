@@ -31,23 +31,33 @@ public class FindPerson {
 
         while (rs.next()) {
             int idPerson = rs.getInt("id");
-            Person person;
-
-            personMap.containsKey(person.getId());
 
 
-            String surnamePerson = rs.getString("surname");
-            String namePerson = rs.getString("name_pers");
-            String patrPerson = rs.getString("patronymic");
-            String cityPerson = rs.getString("city_name");
+            for (Map.Entry<Person, List<Car>> entry : personMap.entrySet()) {
+                if (entry.getKey().getId() == idPerson) {
+                    entry.getValue().add(new Car(rs.getString("car_name")));
 
-            Car carPerson = new Car(rs.getString("car_name"));
+                } else {
 
-            person = new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson
-                    List < Car > cars = new ArrayList<>();
-            cars.add(carPerson);
+                    String surnamePerson = rs.getString("surname");
+                    String namePerson = rs.getString("name_pers");
+                    String patrPerson = rs.getString("patronymic");
+                    String cityPerson = rs.getString("city_name");
+                    List<Car> cars = new ArrayList<>();
+                    cars.add(new Car(rs.getString("car_name")));
 
-            personMap.put(person, cars);
+                }
+
+            }
+//            List<String> list = Stream.of(“One”, “Two”, “Three”).collect(Collectors.toList());
+//            personMap.entrySet().stream().dropWhile(person.getId() == idPerson).
+//
+//
+//
+//            person = new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson
+//
+//
+//            personMap.put(person, cars);
 
 
         }

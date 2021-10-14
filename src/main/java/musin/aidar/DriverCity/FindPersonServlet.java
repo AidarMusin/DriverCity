@@ -1,9 +1,5 @@
 package musin.aidar.DriverCity;
 
-import musin.aidar.DriverCity.connetDB.FindPerson;
-import musin.aidar.DriverCity.myObject.Car;
-import musin.aidar.DriverCity.myObject.Person;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
 @WebServlet(name = "FindPersonServlet", value = "/find")
@@ -60,31 +53,31 @@ public class FindPersonServlet extends HttpServlet {
             }
 
 
-            StringJoiner stringJoiner = new StringJoiner(",");
+//            StringJoiner stringJoiner = new StringJoiner(",");
+//
+//            FindPerson findPerson = new FindPerson();
+//            Map<Person, List<Car>> personMap = null;
+//            try {
+//                personList = findPerson.findPersonInDB(surname, name, patronymic, city, car);
+//                session.setAttribute("personList", personList);
 
-            FindPerson findPerson = new FindPerson();
-            Map<Person, List<Car>> personMap = null;
-            try {
-                personList = findPerson.findPersonInDB(surname, name, patronymic, city, car);
-                session.setAttribute("personList", personList);
+            //getServletContext().getRequestDispatcher("/result.jsp").forward(request,response);
 
-                //getServletContext().getRequestDispatcher("/result.jsp").forward(request,response);
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (SQLException sqlException) {
+//                sqlException.printStackTrace();
+//            }
+//
+//
+//            for (Person p : personList ) {
+//                pw.println("<!DOCTYPE html");
+//                pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>"   );
+//
+//
+//                pw.println("<h3>" + p.getSurname() + " - " + p.getName() + " : " + p.getCity() + " " + " - " + p.getValueCars() + "</h3>");
+//                pw.println("</div></body></html>" );
 
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-            }
-
-
-            for (Person p : personList ) {
-                pw.println("<!DOCTYPE html");
-                pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>"   );
-
-
-                pw.println("<h3>" + p.getSurname() + " - " + p.getName() + " : " + p.getCity() + " " + " - " + p.getValueCars() + "</h3>");
-                pw.println("</div></body></html>" );
-            }
         }
     }
 }
