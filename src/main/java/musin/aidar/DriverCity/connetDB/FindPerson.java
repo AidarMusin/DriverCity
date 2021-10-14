@@ -1,8 +1,11 @@
 package musin.aidar.DriverCity.connetDB;
 
+import musin.aidar.DriverCity.myObject.Car;
 import musin.aidar.DriverCity.setingsPJ.Person;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
@@ -31,7 +34,7 @@ public class FindPerson {
             String carPeople = rs.getString("car_name");
 
             boolean flag = true;
-            ArrayList<String> cars = new ArrayList<>();
+            ArrayList<Car> cars = new ArrayList<>();
 
             // hashMap
 

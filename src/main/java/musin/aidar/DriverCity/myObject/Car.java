@@ -12,6 +12,10 @@ public class Car {
         return name;
     }
 
+    public void setName (String carName) {
+        this.name = name;
+    }
+
 }
 
 

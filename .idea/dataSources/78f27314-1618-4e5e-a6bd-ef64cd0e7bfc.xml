@@ -870,5 +870,131 @@
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,REFERENCES,INDEX,ALTER|FTlIGzTWEp
 </ObjectGrants>
     </user>
+    <table id="275" parent="2" name="car"/>
+    <table id="276" parent="2" name="city"/>
+    <table id="277" parent="2" name="personcar"/>
+    <table id="278" parent="2" name="persons"/>
+    <table id="279" parent="2" name="user_project"/>
+    <column id="280" parent="275" name="car_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="281" parent="275" name="car_name">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="282" parent="275" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>car_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="283" parent="276" name="city_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="284" parent="276" name="city_name">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="285" parent="276" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>city_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="286" parent="277" name="pers_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="287" parent="277" name="cars_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="288" parent="277" name="personcar_person_id_fk">
+      <ColNames>pers_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="289" parent="277" name="personcat_car_id_fk">
+      <ColNames>cars_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="290" parent="277" name="personcar_person_id_fk">
+      <ColNames>pers_id</ColNames>
+      <RefTableName>persons</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="291" parent="277" name="personcat_car_id_fk">
+      <ColNames>cars_id</ColNames>
+      <RefTableName>car</RefTableName>
+      <RefColNames>car_id</RefColNames>
+    </foreign-key>
+    <column id="292" parent="278" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="293" parent="278" name="surname">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="294" parent="278" name="name_pers">
+      <Position>3</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="295" parent="278" name="patronymic">
+      <Position>4</Position>
+      <DataType>varchar(15)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="296" parent="278" name="id_city">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="297" parent="278" name="person_city_city_id_fk">
+      <ColNames>id_city</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="298" parent="278" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="299" parent="278" name="person_city_city_id_fk">
+      <ColNames>id_city</ColNames>
+      <RefTableName>city</RefTableName>
+      <RefColNames>city_id</RefColNames>
+    </foreign-key>
+    <column id="300" parent="279" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="301" parent="279" name="login">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="302" parent="279" name="password">
+      <Position>3</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="303" parent="279" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>
