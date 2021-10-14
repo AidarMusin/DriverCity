@@ -1,8 +1,8 @@
-package musin.aidar.DriverCity.authorization;
+package musin.aidar.DriverCity.myObject;
 
 public class UserProject {
-    private final String userProjectName;
-    private final String userProjectPass;
+    private String userProjectName;
+    private String userProjectPass;
     private int userProjectId;
 
     public UserProject(String userName, String userProjectPass) {

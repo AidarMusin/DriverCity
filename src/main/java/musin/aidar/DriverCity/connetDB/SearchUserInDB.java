@@ -1,10 +1,10 @@
 package musin.aidar.DriverCity.connetDB;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
-import static musin.aidar.DriverCity.connetDB.SetingsDB.getConn;
+import static musin.aidar.DriverCity.connetDB.SetingsDB.connection;
 import static musin.aidar.DriverCity.connetDB.SetingsDB.query;
 
 
@@ -13,7 +13,7 @@ public class SearchUserInDB {
     public int findUserId(String loginUser, String passUser) throws ClassNotFoundException, SQLException {
         int resultsId = 0;
 
-        PreparedStatement preparedStatement = getConn().prepareStatement(query);
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, loginUser);
         preparedStatement.setString(2, passUser);
 
@@ -24,20 +24,20 @@ public class SearchUserInDB {
         }
 
         preparedStatement.close();
-
         return resultsId;
     }
 
 
-    public boolean findUser(String loginUser, String passUser) throws ClassNotFoundException, SQLException {
+    public boolean findUser(String loginUser, String passUser)  throws ClassNotFoundException, SQLException {
 
-        PreparedStatement preparedStatement = getConn().prepareStatement(query);
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, loginUser);
         preparedStatement.setString(2, passUser);
 
         ResultSet resultSet = preparedStatement.executeQuery();
+        boolean checkPerson = resultSet.next();
+        preparedStatement.close();
 
-
-        return resultSet.next();
+        return checkPerson;
     }
 }
