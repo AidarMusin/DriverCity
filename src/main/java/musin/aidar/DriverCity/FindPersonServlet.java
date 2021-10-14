@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -66,7 +67,12 @@ public class FindPersonServlet extends HttpServlet {
 
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
             }
+
+
+
 
             for (Person p : personList ) {
                 pw.println("<!DOCTYPE html");

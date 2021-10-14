@@ -58,7 +58,6 @@ public class SearchUserInDBServlet extends HttpServlet {
             e.printStackTrace();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-
         }
     }
 

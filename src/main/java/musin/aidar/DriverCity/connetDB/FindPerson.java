@@ -9,48 +9,47 @@ import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
 
 public class FindPerson {
 
-    public ArrayList<Person> findPersonInDB(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException {
+    public ArrayList<Person> findPersonInDB(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException, SQLException {
         ArrayList<Person> personList = new ArrayList<Person>();
-        Class.forName("com.mysql.cj.jdbc.Driver");
-
-        try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
-            preparedStatement.setString(1,surname);
-            preparedStatement.setString(2,name);
-            preparedStatement.setString(3,patronymic);
-            preparedStatement.setString(4,city);
-            preparedStatement.setString(5,car);
 
 
-            ResultSet rs = preparedStatement.executeQuery();
+        PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
+        preparedStatement.setString(1,surname);
+        preparedStatement.setString(2,name);
+        preparedStatement.setString(3,patronymic);
+        preparedStatement.setString(4,city);
+        preparedStatement.setString(5,car);
 
-            while (rs.next()) {
-                String surnamePeople = rs.getString("surname");
-                String namePeople = rs.getString("name_pers");
-                String patrPeople = rs.getString("patronymic");
-                String cityPeople = rs.getString("city_name");
-                String carPeople = rs.getString("car_name");
 
-                boolean flag = true;
-                ArrayList<String> cars = new ArrayList<>();
+        ResultSet rs = preparedStatement.executeQuery();
 
-                for (Person pl : personList) {
-                    if (pl.getSurname().equals(surnamePeople) && pl.getName().equals(namePeople) && pl.getPatronymic().equals(patrPeople)) {
-                        pl.addCar(carPeople);
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag) {
-                    cars.add(carPeople);
-                    personList.add(new Person(surnamePeople, namePeople, patrPeople, cityPeople, cars));
+        while (rs.next()) {
+            String surnamePeople = rs.getString("surname");
+            String namePeople = rs.getString("name_pers");
+            String patrPeople = rs.getString("patronymic");
+            String cityPeople = rs.getString("city_name");
+            String carPeople = rs.getString("car_name");
+
+            boolean flag = true;
+            ArrayList<String> cars = new ArrayList<>();
+
+            // hashMap
+
+            for (Person pl : personList) {
+                if (pl.getSurname().equals(surnamePeople) && pl.getName().equals(namePeople) && pl.getPatronymic().equals(patrPeople)) {
+                    pl.addCar(carPeople);
+                    flag = false;
+                    break;
                 }
             }
+            if (flag) {
+                cars.add(carPeople);
+                personList.add(new Person(surnamePeople, namePeople, patrPeople, cityPeople, cars));
+            }
 
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            // hashMap
         }
+
 
         return personList;
     }
