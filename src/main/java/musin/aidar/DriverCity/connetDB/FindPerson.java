@@ -12,16 +12,15 @@ import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
 
 public class FindPerson {
 
-    public ArrayList<Person> findPersonInDB(String surname, String name, String patronymic, String city, String car) throws ClassNotFoundException, SQLException {
+    public ArrayList<Person> findPersonInDB(String surname, String name, String patronymic, String city, String carName) throws ClassNotFoundException, SQLException {
         ArrayList<Person> personList = new ArrayList<Person>();
-
 
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
         preparedStatement.setString(1,surname);
         preparedStatement.setString(2,name);
         preparedStatement.setString(3,patronymic);
         preparedStatement.setString(4,city);
-        preparedStatement.setString(5,car);
+        preparedStatement.setString(5,carName);
 
 
         ResultSet rs = preparedStatement.executeQuery();
@@ -31,7 +30,7 @@ public class FindPerson {
             String namePeople = rs.getString("name_pers");
             String patrPeople = rs.getString("patronymic");
             String cityPeople = rs.getString("city_name");
-            String carPeople = rs.getString("car_name");
+            Car car = new Car(rs.getString("car_name"));
 
             boolean flag = true;
             ArrayList<Car> cars = new ArrayList<>();
