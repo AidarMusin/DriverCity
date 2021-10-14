@@ -1,6 +1,7 @@
 package musin.aidar.DriverCity.authorization;
 
 import musin.aidar.DriverCity.connetDB.SearchUserInDB;
+import musin.aidar.DriverCity.myObject.UserProject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "SearchUserInDBServlet", value = "/user-search")
 public class SearchUserInDBServlet extends HttpServlet {
@@ -20,15 +22,16 @@ public class SearchUserInDBServlet extends HttpServlet {
 
         UserProject userProject = (UserProject) session.getAttribute("userProject");
 
-        if (userProject == null) {
-            SearchUserInDB searchUserInDB = new SearchUserInDB();
-            boolean checkUserProject = false;
-            String userProjectName = request.getParameter("login");
-            String userProjectPass = request.getParameter("pass");
+        try {
 
+            if (userProject == null) {
 
-            try {
-                checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
+                SearchUserInDB searchUserInDB = new SearchUserInDB();
+
+                String userProjectName = request.getParameter("login");
+                String userProjectPass = request.getParameter("pass");
+
+                boolean  checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
                 if (checkUserProject) {
 
@@ -45,13 +48,17 @@ public class SearchUserInDBServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
                 }
 
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
+            } else {
+                getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
 
 
-        } else {
-            getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
         }
     }
 

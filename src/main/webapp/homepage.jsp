@@ -1,6 +1,6 @@
-<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%@ page import="musin.aidar.DriverCity.myObject.UserProject" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%@ page import="musin.aidar.DriverCity.myObject.UserProject" %>
 <%@ page import="java.lang.*" %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +23,8 @@
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
                 dispatcher.forward(request, response);
             } else {
-                out.println("Пользователь: " + userProject.getUserName());
-                out.println("Идентификатор: " + userProject.getUserProjectId());
+                out.println("Пользователь: " + userProject.getUserName()); // changed
+                out.println("Идентификатор: " + userProject.getUserProjectId()); // changed
             }
         %>
     </span>

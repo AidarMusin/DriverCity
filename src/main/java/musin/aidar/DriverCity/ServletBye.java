@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "ServletBy", value = "/ServletBy")
-public class ServletBy extends HttpServlet {
+public class ServletBye extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -22,7 +22,7 @@ public class ServletBy extends HttpServlet {
 
         session.invalidate();
 
-        getServletContext().getRequestDispatcher("/by.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/bye.jsp").forward(request, response);
 
     }
 }

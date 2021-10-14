@@ -1,8 +1,13 @@
 package musin.aidar.DriverCity.connetDB;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class SetingsDB {
     protected static String userName = "FTlIGzTWEp";
     protected static String passw = "qmhs6Ylyb5";
+    protected static String driverJdbc = "com.mysql.cj.jdbc.Driver";
     protected static String connectionUrl = "jdbc:mysql://remotemysql.com:3306/FTlIGzTWEp";
     protected final static String query = "SELECT * FROM user_project WHERE login = ? AND password = ? ;";
     protected final static String queryAll = "SELECT surname, name_pers, patronymic, city_name, car_name" +
@@ -14,5 +19,20 @@ public class SetingsDB {
             " patronymic LIKE ? AND" +
             " city_name LIKE ? AND" +
             " car_name LIKE ? ; ";
+
+    protected static Connection connection;
+
+
+    static {
+        try {
+            Class.forName(driverJdbc);
+            connection = DriverManager.getConnection(connectionUrl, userName, passw);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+    }
 
 }

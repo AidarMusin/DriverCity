@@ -1,49 +1,43 @@
 package musin.aidar.DriverCity.connetDB;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
-import static musin.aidar.DriverCity.connetDB.SetingsDB.*;
+import static musin.aidar.DriverCity.connetDB.SetingsDB.connection;
+import static musin.aidar.DriverCity.connetDB.SetingsDB.query;
 
 
 public class SearchUserInDB {
 
-    public int findUserId(String loginUser, String passUser) throws ClassNotFoundException {
+    public int findUserId(String loginUser, String passUser) throws ClassNotFoundException, SQLException {
         int resultsId = 0;
-        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        try (Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, loginUser);
-            preparedStatement.setString(2, passUser);
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, loginUser);
+        preparedStatement.setString(2, passUser);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                resultsId = resultSet.getInt("id");
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+        while (resultSet.next()) {
+            resultsId = resultSet.getInt("id");
         }
+
+        preparedStatement.close();
         return resultsId;
     }
 
 
-    public boolean findUser(String loginUser, String passUser)  throws ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        boolean checkUserProject = false;
+    public boolean findUser(String loginUser, String passUser)  throws ClassNotFoundException, SQLException {
 
-        try(Connection connection = DriverManager.getConnection(connectionUrl, userName, passw)) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, loginUser);
-            preparedStatement.setString(2, passUser);
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, loginUser);
+        preparedStatement.setString(2, passUser);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            checkUserProject = resultSet.next();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        boolean checkPerson = resultSet.next();
+        preparedStatement.close();
 
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-        return checkUserProject;
+        return checkPerson;
     }
 }

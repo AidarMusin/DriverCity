@@ -8,7 +8,7 @@
     <title>FIND</title>
 </head>
 <body>
-<%@ page import="musin.aidar.DriverCity.authorization.UserProject" %>
+<%@ page import="musin.aidar.DriverCity.myObject.UserProject" %>
 
 <br/>
 <div style="text-align: center">
@@ -38,8 +38,9 @@
                 String login = request.getParameter("login");
                 String errorUser = (String) session.getAttribute("errorUser");
                 if ((errorUser != null) || (login == null) || (login.equals(""))) {
-                    if (errorUser != null)
-                        out.println(errorUser);
+                    if (errorUser != null) {
+                        out.println(errorUser); // changed
+                    }
                 }
             %>
         </span>
