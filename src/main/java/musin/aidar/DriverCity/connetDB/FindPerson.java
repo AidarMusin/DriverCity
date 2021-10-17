@@ -6,10 +6,11 @@ import musin.aidar.DriverCity.myObject.Person;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static musin.aidar.DriverCity.connetDB.SetingsDB.connection;
 import static musin.aidar.DriverCity.connetDB.SetingsDB.queryAll;
@@ -31,34 +32,34 @@ public class FindPerson {
 
         while (rs.next()) {
             int idPerson = rs.getInt("id");
+            String surnamePerson = rs.getString("surname");
+            String namePerson = rs.getString("name_pers");
+            String patrPerson = rs.getString("patronymic");
+            String cityPerson = rs.getString("city_name");
+            String carPerson = rs.getString("car_name");
+
+            boolean check = personMap.entrySet().stream().anyMatch(x -> x.getKey().getId() == idPerson);
+
+            if (!check || personMap.isEmpty()) {
+
+                personMap.put(new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), Stream.of(new Car(carName)).collect(Collectors.toList()));
 
 
-            for (Map.Entry<Person, List<Car>> entry : personMap.entrySet()) {
-                if (entry.getKey().getId() == idPerson) {
-                    entry.getValue().add(new Car(rs.getString("car_name")));
+            } else {
+                for (Map.Entry<Person, List<Car>> maps : personMap.entrySet()) {
+                    Person pers = maps.getKey();
+                    int personId = pers.getId();
+                    List<Car> carsNew = maps.getValue();
 
-                } else {
+                    if (personId == idPerson) {
 
-                    String surnamePerson = rs.getString("surname");
-                    String namePerson = rs.getString("name_pers");
-                    String patrPerson = rs.getString("patronymic");
-                    String cityPerson = rs.getString("city_name");
-                    List<Car> cars = new ArrayList<>();
-                    cars.add(new Car(rs.getString("car_name")));
-
+                        carsNew.add(new Car(carPerson));
+                        maps.setValue(carsNew);
+                        break;
+                    }
                 }
 
             }
-//            List<String> list = Stream.of(“One”, “Two”, “Three”).collect(Collectors.toList());
-//            personMap.entrySet().stream().dropWhile(person.getId() == idPerson).
-//
-//
-//
-//            person = new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson
-//
-//
-//            personMap.put(person, cars);
-
 
         }
         return personMap;
