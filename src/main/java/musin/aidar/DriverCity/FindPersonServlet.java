@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @WebServlet(name = "FindPersonServlet", value = "/find")
@@ -35,7 +36,7 @@ public class FindPersonServlet extends HttpServlet {
 
         } else {
 
-            ArrayList<String> checkList = new ArrayList<>();
+            List<String> checkList = new ArrayList<>();
             String plug = "%";
             boolean checkVar = false;
             String surname = request.getParameter("surname") + plug;
@@ -44,11 +45,8 @@ public class FindPersonServlet extends HttpServlet {
             String city = request.getParameter("city") + plug;
             String car = request.getParameter("car") + plug;
 
-            checkList.add(surname);
-            checkList.add(name);
-            checkList.add(patronymic);
-            checkList.add(city);
-            checkList.add(car);
+            checkList = Stream.of(surname, name, patronymic, city, car).collect(Collectors.toList());
+
 
             for (String str : checkList) {
                 if (!str.equals(plug)) {
