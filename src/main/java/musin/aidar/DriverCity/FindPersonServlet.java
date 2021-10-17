@@ -65,19 +65,21 @@ public class FindPersonServlet extends HttpServlet {
 
             FindPerson findPerson = new FindPerson();
             Map<Person, List<Car>> personMap = null;
+
             try {
                 personMap = findPerson.findPersonInDB(surname, name, patronymic, city, car);
                 session.setAttribute("personList", personMap);
 
-                for (Map.Entry<Person, List<Car>> p : personMap.entrySet()) {
-                    pw.println("<!DOCTYPE html");
-                    pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>");
 
-                    String carrr = p.getValue().stream().map(Car::getName).collect(Collectors.joining(", "));
-                    pw.println("<h3>" + p.getKey().getSurname() + " - " + p.getKey().getName() + " : " + p.getKey().getCity() + " " + " - " + carrr + "</h3>");
-                    pw.println("</div></body></html>");
+                pw.println("<!DOCTYPE html");
+                pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>");
 
-                }
+                personMap.forEach((k, v) -> pw.println("<h3>" + k.getName() + " " +
+                        k.getSurname() + " - " +
+                        k.getCity() + " : " +
+                        v.stream().map(Car::getName).collect(Collectors.joining(", ")) + "</h3>"));
+
+                pw.println("</div></body></html>");
 
 
             } catch (ClassNotFoundException e) {

@@ -21,6 +21,7 @@ public class FindPerson {
 
         Map<Person, List<Car>> personMap = new HashMap<Person, List<Car>>();
 
+
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
         preparedStatement.setString(1, surname);
         preparedStatement.setString(2, name);
@@ -42,8 +43,7 @@ public class FindPerson {
 
             if (!check || personMap.isEmpty()) {
 
-                personMap.put(new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), Stream.of(new Car(carName)).collect(Collectors.toList()));
-
+                personMap.put(new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), Stream.of(new Car(carPerson)).collect(Collectors.toList()));
 
             } else {
                 for (Map.Entry<Person, List<Car>> maps : personMap.entrySet()) {
