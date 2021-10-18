@@ -1,6 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.lang.String" %>
-
+<%!
+    String sendError(String login, String errorUser) {
+        String errorMessage = "";
+        if ((errorUser != null) || (login == null) || (login.equals(""))) {
+            if (errorUser != null) {
+                errorMessage = errorUser;
+            }
+        }
+        return errorMessage;
+    }
+%>
 <!doctype html>
 <html>
 <link rel="stylesheet" type="text/css" href="resources/mycss.css">
@@ -8,7 +18,7 @@
     <title>FIND</title>
 </head>
 <body>
-<%@ page import="musin.aidar.DriverCity.myObject.UserProject" %>
+
 
 <br/>
 <div style="text-align: center">
@@ -34,18 +44,14 @@
     </form>
 
     <span class="error-user">
-            <%
-                String login = request.getParameter("login");
-                String errorUser = (String) session.getAttribute("errorUser");
-                if ((errorUser != null) || (login == null) || (login.equals(""))) {
-                    if (errorUser != null) {
-                        out.println(errorUser); // changed
-                    }
-                }
-            %>
+        <%
+            String login = request.getParameter("login");
+            String errorUser = (String) session.getAttribute("errorUser");
+        %>
+
+        <h3 style="color: crimson"><%= sendError(login, errorUser) %> </h3>
         </span>
 </div>
 </body>
-
 </html>
 

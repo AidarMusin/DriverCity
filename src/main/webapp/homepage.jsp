@@ -22,11 +22,10 @@
             if (userProject == null) {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/userspage.jsp");
                 dispatcher.forward(request, response);
-            } else {
-                out.println("Пользователь: " + userProject.getUserName()); // changed
-                out.println("Идентификатор: " + userProject.getUserProjectId()); // changed
-            }
-        %>
+            } %>
+        <p><%="Пользователь: " + userProject.getUserName()%></p>
+        <p><%="Идентификатор: " + userProject.getUserProjectId()%></p>
+
     </span>
 
     <form method="post" action="/ServletBy">
@@ -34,7 +33,7 @@
             <button> Выход</button>
         </div>
     </form>
-
+    <br>
     <form method="post" id="checkedForm" action="/find">
         <span class="left-profile-text"> Введите критерии поиска: </span> <br/><br/>
         <div class="input-field">

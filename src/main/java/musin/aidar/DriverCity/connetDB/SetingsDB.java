@@ -24,6 +24,7 @@ public class SetingsDB {
 
 
     static {
+
         try {
             Class.forName(driverJdbc);
             connection = DriverManager.getConnection(connectionUrl, userName, passw);

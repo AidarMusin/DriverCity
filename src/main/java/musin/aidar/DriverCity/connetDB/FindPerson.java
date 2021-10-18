@@ -19,7 +19,7 @@ public class FindPerson {
 
     public Map<Person, List<Car>> findPersonInDB(List<String> personRequest) throws ClassNotFoundException, SQLException {
 
-        Map<Person, List<Car>> personMap = new HashMap<Person, List<Car>>();
+        Map<Person, List<Car>> personMap = new HashMap<>();
 
         String plug = "%";
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);

@@ -81,8 +81,9 @@
             <resource>
 
             <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
-                    <include>setingsDB.properties</include>
+                    <include>*.*</include>
                 </includes>
             </resource>
         </resources>
