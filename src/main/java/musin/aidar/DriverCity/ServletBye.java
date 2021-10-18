@@ -11,18 +11,23 @@ import java.io.IOException;
 @WebServlet(name = "ServletBy", value = "/ServletBy")
 public class ServletBye extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         HttpSession session = request.getSession();
 
         session.invalidate();
 
-        getServletContext().getRequestDispatcher("/bye.jsp").forward(request, response);
+        try {
+            getServletContext().getRequestDispatcher("/bye.jsp").forward(request, response);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 }

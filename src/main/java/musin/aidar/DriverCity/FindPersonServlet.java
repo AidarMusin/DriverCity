@@ -23,49 +23,46 @@ import java.util.stream.Stream;
 @WebServlet(name = "FindPersonServlet", value = "/find")
 public class FindPersonServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         HttpSession session = request.getSession();
-        PrintWriter pw = response.getWriter();
 
-        if (session.getAttribute("userProject") == null) {
-            getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
+        try (PrintWriter pw = response.getWriter()) {
 
-        } else {
+            if (session.getAttribute("userProject") == null) {
+                getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
 
-            List<String> checkList = new ArrayList<>();
-            String plug = "%";
-            boolean checkVar = false;
-            String surname = request.getParameter("surname") + plug;
-            String name = request.getParameter("name") + plug;
-            String patronymic = request.getParameter("patronymic") + plug;
-            String city = request.getParameter("city") + plug;
-            String car = request.getParameter("car") + plug;
+            } else {
 
-            checkList = Stream.of(surname, name, patronymic, city, car).collect(Collectors.toList());
+                List<String> personRequest = Stream.of(request.getParameter("surname"),
+                        request.getParameter("name"),
+                        request.getParameter("patronymic"),
+                        request.getParameter("city"),
+                        request.getParameter("car")).collect(Collectors.toList());
 
+                String plug = "";
+                boolean checkVar = false;
 
-            for (String str : checkList) {
-                if (!str.equals(plug)) {
-                    checkVar = true;
+                for (String str : personRequest) {
+                    if (!str.equals(plug)) {
+                        checkVar = true;
+                    }
                 }
-            }
-
-            if (!checkVar) {
-                getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
-            }
 
 
-            //StringJoiner stringJoiner = new StringJoiner(",");
+                if (!checkVar) {
+                    getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
+                }
 
-            FindPerson findPerson = new FindPerson();
-            Map<Person, List<Car>> personMap = null;
 
-            try {
-                personMap = findPerson.findPersonInDB(surname, name, patronymic, city, car);
+                FindPerson findPerson = new FindPerson();
+                Map<Person, List<Car>> personMap = null;
+
+
+                personMap = findPerson.findPersonInDB(personRequest);
                 session.setAttribute("personList", personMap);
 
 
@@ -78,13 +75,17 @@ public class FindPersonServlet extends HttpServlet {
                         v.stream().map(Car::getName).collect(Collectors.joining(", ")) + "</h3>"));
 
                 pw.println("</div></body></html>");
-
-
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+
         }
     }
 }

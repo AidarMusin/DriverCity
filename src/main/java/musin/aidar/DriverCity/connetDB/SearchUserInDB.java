@@ -18,12 +18,12 @@ public class SearchUserInDB {
         preparedStatement.setString(2, passUser);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-
         while (resultSet.next()) {
             resultsId = resultSet.getInt("id");
         }
 
         preparedStatement.close();
+
         return resultsId;
     }
 
@@ -36,6 +36,7 @@ public class SearchUserInDB {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         boolean checkPerson = resultSet.next();
+
         preparedStatement.close();
 
         return checkPerson;

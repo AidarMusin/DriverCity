@@ -7,7 +7,7 @@ public class Person {
     private final String patronymic;
     private final String city;
 
-    public Person(int id, String surname, String name, String patronymic, String city) { //, ArrayList<String> cars) {
+    public Person(int id, String surname, String name, String patronymic, String city) {
         this.id = id;
         this.surname = surname;
         this.name = name;
@@ -25,10 +25,6 @@ public class Person {
 
     public String getName() {
         return name;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
     }
 
     public String getCity() {

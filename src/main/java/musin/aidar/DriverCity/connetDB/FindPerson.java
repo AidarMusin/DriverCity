@@ -17,17 +17,17 @@ import static musin.aidar.DriverCity.connetDB.SetingsDB.queryAll;
 
 public class FindPerson {
 
-    public Map<Person, List<Car>> findPersonInDB(String surname, String name, String patronymic, String city, String carName) throws ClassNotFoundException, SQLException {
+    public Map<Person, List<Car>> findPersonInDB(List<String> personRequest) throws ClassNotFoundException, SQLException {
 
         Map<Person, List<Car>> personMap = new HashMap<Person, List<Car>>();
 
-
+        String plug = "%";
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
-        preparedStatement.setString(1, surname);
-        preparedStatement.setString(2, name);
-        preparedStatement.setString(3, patronymic);
-        preparedStatement.setString(4, city);
-        preparedStatement.setString(5, carName);
+        preparedStatement.setString(1, personRequest.get(0) + plug);
+        preparedStatement.setString(2, personRequest.get(1) + plug);
+        preparedStatement.setString(3, personRequest.get(2) + plug);
+        preparedStatement.setString(4, personRequest.get(3) + plug);
+        preparedStatement.setString(5, personRequest.get(4) + plug);
 
         ResultSet rs = preparedStatement.executeQuery();
 
@@ -39,10 +39,9 @@ public class FindPerson {
             String cityPerson = rs.getString("city_name");
             String carPerson = rs.getString("car_name");
 
-            boolean check = personMap.entrySet().stream().anyMatch(x -> x.getKey().getId() == idPerson);
+            boolean checkingPersonInMap = personMap.entrySet().stream().anyMatch(x -> x.getKey().getId() == idPerson);
 
-            if (!check || personMap.isEmpty()) {
-
+            if (!checkingPersonInMap || personMap.isEmpty()) {
                 personMap.put(new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), Stream.of(new Car(carPerson)).collect(Collectors.toList()));
 
             } else {
@@ -58,10 +57,11 @@ public class FindPerson {
                         break;
                     }
                 }
-
             }
-
         }
+
+        preparedStatement.close();
+
         return personMap;
     }
 }

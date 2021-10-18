@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class SearchUserInDBServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         HttpSession session = request.getSession();
 
@@ -56,8 +56,12 @@ public class SearchUserInDBServlet extends HttpServlet {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
