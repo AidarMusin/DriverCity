@@ -13,7 +13,8 @@
 %>
 <!doctype html>
 <html>
-<link rel="stylesheet" type="text/css" href="resources/mycss.css">
+<link rel="stylesheet" type="text/css" href="resources/css/mycss.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mycss.css">
 <head>
     <title>FIND</title>
 </head>

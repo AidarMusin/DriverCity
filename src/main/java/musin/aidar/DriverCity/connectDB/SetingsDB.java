@@ -1,4 +1,4 @@
-package musin.aidar.DriverCity.connetDB;
+package musin.aidar.DriverCity.connectDB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

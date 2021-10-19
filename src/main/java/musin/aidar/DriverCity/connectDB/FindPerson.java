@@ -1,4 +1,4 @@
-package musin.aidar.DriverCity.connetDB;
+package musin.aidar.DriverCity.connectDB;
 
 import musin.aidar.DriverCity.myObject.Car;
 import musin.aidar.DriverCity.myObject.Person;
@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static musin.aidar.DriverCity.connetDB.SetingsDB.connection;
-import static musin.aidar.DriverCity.connetDB.SetingsDB.queryAll;
+import static musin.aidar.DriverCity.connectDB.SetingsDB.connection;
+import static musin.aidar.DriverCity.connectDB.SetingsDB.queryAll;
 
 public class FindPerson {
 

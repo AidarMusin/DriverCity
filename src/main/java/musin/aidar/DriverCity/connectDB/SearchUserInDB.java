@@ -1,11 +1,11 @@
-package musin.aidar.DriverCity.connetDB;
+package musin.aidar.DriverCity.connectDB;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-import static musin.aidar.DriverCity.connetDB.SetingsDB.connection;
-import static musin.aidar.DriverCity.connetDB.SetingsDB.query;
+import static musin.aidar.DriverCity.connectDB.SetingsDB.connection;
+import static musin.aidar.DriverCity.connectDB.SetingsDB.query;
 
 
 public class SearchUserInDB {

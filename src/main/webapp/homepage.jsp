@@ -10,7 +10,7 @@
     <script src="ajax.js"></script>
 
     <title>FIND in DB</title>
-    <link rel="stylesheet" type="text/css" href="resources/mycss.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mycss.css">
 </head>
 <body>
 <div class="all-div">

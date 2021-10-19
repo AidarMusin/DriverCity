@@ -1,17 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Sabrina
-  Date: 07.10.2021
-  Time: 23:17
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 
 <head>
     <title>BYE</title>
-    <style rel="stylesheet" href="\resources\css\bye.css"></style>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bye.css">
 
 </head>
 <body>

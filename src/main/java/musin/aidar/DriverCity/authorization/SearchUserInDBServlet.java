@@ -1,6 +1,6 @@
 package musin.aidar.DriverCity.authorization;
 
-import musin.aidar.DriverCity.connetDB.SearchUserInDB;
+import musin.aidar.DriverCity.connectDB.SearchUserInDB;
 import musin.aidar.DriverCity.myObject.UserProject;
 
 import javax.servlet.ServletException;

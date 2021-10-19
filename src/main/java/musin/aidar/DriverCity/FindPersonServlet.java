@@ -1,6 +1,6 @@
 package musin.aidar.DriverCity;
 
-import musin.aidar.DriverCity.connetDB.FindPerson;
+import musin.aidar.DriverCity.connectDB.FindPerson;
 import musin.aidar.DriverCity.myObject.Car;
 import musin.aidar.DriverCity.myObject.Person;
 
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
