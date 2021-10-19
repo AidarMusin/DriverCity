@@ -1,14 +1,18 @@
 package musin.aidar.DriverCity.connectDB;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
-public class SetingsDB {
-    protected static String userName = "FTlIGzTWEp";
-    protected static String passw = "qmhs6Ylyb5";
-    protected static String driverJdbc = "com.mysql.cj.jdbc.Driver";
-    protected static String connectionUrl = "jdbc:mysql://remotemysql.com:3306/FTlIGzTWEp";
+public class SettingsDB {
+    protected static String userName;
+    protected static String passw;
+    protected static String connectionUrl;
+    protected static String driverJdbc;
+
     protected final static String query = "SELECT * FROM user_project WHERE login = ? AND password = ? ;";
     protected final static String queryAll = "SELECT id, surname, name_pers, patronymic, city_name, car_name" +
             " FROM ((persons p INNER JOIN personcar pc ON p.id = pc.pers_id)" +
@@ -25,7 +29,16 @@ public class SetingsDB {
 
     static {
 
-        try {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+        try (InputStream inputStream = classLoader.getResourceAsStream("settingsDB.properties")) {
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            userName = properties.getProperty("username");
+            passw = properties.getProperty("password");
+            connectionUrl = properties.getProperty("connectionUrl");
+            driverJdbc = properties.getProperty("driverJdbs");
+
             Class.forName(driverJdbc);
             connection = DriverManager.getConnection(connectionUrl, userName, passw);
 
@@ -33,7 +46,10 @@ public class SetingsDB {
             e.printStackTrace();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
+
     }
 
 }

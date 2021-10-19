@@ -12,14 +12,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static musin.aidar.DriverCity.connectDB.SetingsDB.connection;
-import static musin.aidar.DriverCity.connectDB.SetingsDB.queryAll;
+import static musin.aidar.DriverCity.connectDB.SettingsDB.connection;
+import static musin.aidar.DriverCity.connectDB.SettingsDB.queryAll;
 
 public class FindPerson {
 
     public Map<Person, List<Car>> findPersonInDB(List<String> personRequest) throws ClassNotFoundException, SQLException {
-
-        Map<Person, List<Car>> personMap = new HashMap<>();
 
         String plug = "%";
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
@@ -29,15 +27,26 @@ public class FindPerson {
         preparedStatement.setString(4, personRequest.get(3) + plug);
         preparedStatement.setString(5, personRequest.get(4) + plug);
 
-        ResultSet rs = preparedStatement.executeQuery();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-        while (rs.next()) {
-            int idPerson = rs.getInt("id");
-            String surnamePerson = rs.getString("surname");
-            String namePerson = rs.getString("name_pers");
-            String patrPerson = rs.getString("patronymic");
-            String cityPerson = rs.getString("city_name");
-            String carPerson = rs.getString("car_name");
+        Map<Person, List<Car>> personMap = getMap(resultSet);
+
+
+        preparedStatement.close();
+
+        return personMap;
+    }
+
+    private Map<Person, List<Car>> getMap(ResultSet resultSet) throws SQLException {
+        Map<Person, List<Car>> personMap = new HashMap<>();
+
+        while (resultSet.next()) {
+            int idPerson = resultSet.getInt("id");
+            String surnamePerson = resultSet.getString("surname");
+            String namePerson = resultSet.getString("name_pers");
+            String patrPerson = resultSet.getString("patronymic");
+            String cityPerson = resultSet.getString("city_name");
+            String carPerson = resultSet.getString("car_name");
 
             boolean checkingPersonInMap = personMap.entrySet().stream().anyMatch(x -> x.getKey().getId() == idPerson);
 
@@ -59,9 +68,6 @@ public class FindPerson {
                 }
             }
         }
-
-        preparedStatement.close();
-
         return personMap;
     }
 }
