@@ -3,6 +3,8 @@ package musin.aidar.DriverCity;
 import musin.aidar.DriverCity.connectDB.FindPerson;
 import musin.aidar.DriverCity.myObject.Car;
 import musin.aidar.DriverCity.myObject.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,9 @@ import java.util.stream.Stream;
 
 @WebServlet(name = "FindPersonServlet", value = "/find")
 public class FindPersonServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(FindPersonServlet.class);
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException{
     }
@@ -28,6 +33,7 @@ public class FindPersonServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         HttpSession session = request.getSession();
+
 
         try (PrintWriter pw = response.getWriter()) {
             if (session.getAttribute("userProject") == null) {
@@ -63,8 +69,10 @@ public class FindPersonServlet extends HttpServlet {
 
 
 
+
                 pw.println("<!DOCTYPE html");
                 pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>");
+
 
                 personMap.forEach((k, v) -> pw.println("<h3>" + k.getName() + " " +
                         k.getSurname() + " - " +
@@ -77,7 +85,8 @@ public class FindPersonServlet extends HttpServlet {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException sqlException) {
