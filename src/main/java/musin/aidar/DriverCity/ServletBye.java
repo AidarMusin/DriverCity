@@ -1,5 +1,9 @@
 package musin.aidar.DriverCity;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +14,8 @@ import java.io.IOException;
 
 @WebServlet(name = "ServletBy", value = "/ServletBy")
 public class ServletBye extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(ServletBye.class);
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
@@ -21,11 +27,13 @@ public class ServletBye extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
 
+        logger.info("session close!");
+
         try {
             getServletContext().getRequestDispatcher("/bye.jsp").forward(request, response);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

@@ -2,6 +2,8 @@ package musin.aidar.DriverCity.authorization;
 
 import musin.aidar.DriverCity.connectDB.SearchUserInDB;
 import musin.aidar.DriverCity.myObject.UserProject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "SearchUserInDBServlet", value = "/user-search")
 public class SearchUserInDBServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(SearchUserInDBServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {

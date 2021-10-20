@@ -2,6 +2,8 @@ package musin.aidar.DriverCity.connectDB;
 
 import musin.aidar.DriverCity.myObject.Car;
 import musin.aidar.DriverCity.myObject.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +18,8 @@ import static musin.aidar.DriverCity.connectDB.SettingsDB.connection;
 import static musin.aidar.DriverCity.connectDB.SettingsDB.queryAll;
 
 public class FindPerson {
+    private static final Logger logger = LoggerFactory.getLogger(FindPerson.class);
+
 
     public Map<Person, List<Car>> findPersonInDB(List<String> personRequest) throws ClassNotFoundException, SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
@@ -26,7 +30,10 @@ public class FindPerson {
         while (count < 5) {
             preparedStatement.setString(count + 1, personRequest.get(count) + plug);
             count ++;
+
+
         }
+
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -39,7 +46,8 @@ public class FindPerson {
             String cityPerson = resultSet.getString("city_name");
             String carPerson = resultSet.getString("car_name");
 
-            addPersonInMap(personMap,new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson),new Car(carPerson));
+            logger.info("query: - {}{}", surnamePerson, namePerson);
+            addPersonInMap(personMap, new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), new Car(carPerson));
         }
 
         preparedStatement.close();
