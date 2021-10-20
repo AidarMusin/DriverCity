@@ -23,7 +23,6 @@ public class SearchUserInDB {
         }
 
         preparedStatement.close();
-
         return resultsId;
     }
 
@@ -38,7 +37,6 @@ public class SearchUserInDB {
         boolean checkPerson = resultSet.next();
 
         preparedStatement.close();
-
         return checkPerson;
     }
 }

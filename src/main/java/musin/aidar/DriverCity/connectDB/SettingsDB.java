@@ -28,12 +28,12 @@ public class SettingsDB {
 
 
     static {
-
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
         try (InputStream inputStream = classLoader.getResourceAsStream("settingsDB.properties")) {
             Properties properties = new Properties();
             properties.load(inputStream);
+
             userName = properties.getProperty("username");
             passw = properties.getProperty("password");
             connectionUrl = properties.getProperty("connectionUrl");

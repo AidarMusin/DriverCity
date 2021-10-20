@@ -19,13 +19,10 @@ public class SearchUserInDBServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         HttpSession session = request.getSession();
-
         UserProject userProject = (UserProject) session.getAttribute("userProject");
 
         try {
-
             if (userProject == null) {
-
                 SearchUserInDB searchUserInDB = new SearchUserInDB();
 
                 String userProjectName = request.getParameter("login");
@@ -34,7 +31,6 @@ public class SearchUserInDBServlet extends HttpServlet {
                 boolean  checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
                 if (checkUserProject) {
-
                     userProject = new UserProject(userProjectName, userProjectPass);
                     userProject.setUserProjectId(searchUserInDB.findUserId(userProjectName, userProjectPass));
 
@@ -48,7 +44,6 @@ public class SearchUserInDBServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
                 }
 
-
             } else {
                 getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
@@ -56,14 +51,13 @@ public class SearchUserInDBServlet extends HttpServlet {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

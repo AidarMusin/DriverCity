@@ -19,6 +19,7 @@ public class FindPerson {
 
     public Map<Person, List<Car>> findPersonInDB(List<String> personRequest) throws ClassNotFoundException, SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(queryAll);
+        Map<Person, List<Car>> personMap = new HashMap<>();
 
         String plug = "%";
         int count = 0;
@@ -29,7 +30,6 @@ public class FindPerson {
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        Map<Person, List<Car>> personMap = new HashMap<>();
 
         while (resultSet.next()) {
             int idPerson = resultSet.getInt("id");
@@ -45,6 +45,7 @@ public class FindPerson {
         preparedStatement.close();
         return personMap;
     }
+
 
     private Map<Person,List<Car>> addPersonInMap (Map<Person,List<Car>> personMap, Person person, Car car) {
         boolean checkingPersonInMap = personMap.entrySet().stream().anyMatch(x -> x.getKey().getId() == person.getId());

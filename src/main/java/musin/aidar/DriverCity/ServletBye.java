@@ -19,7 +19,6 @@ public class ServletBye extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         HttpSession session = request.getSession();
-
         session.invalidate();
 
         try {
@@ -27,7 +26,6 @@ public class ServletBye extends HttpServlet {
 
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
 }

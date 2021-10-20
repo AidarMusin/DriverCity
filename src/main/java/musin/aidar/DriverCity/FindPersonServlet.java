@@ -30,12 +30,10 @@ public class FindPersonServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         try (PrintWriter pw = response.getWriter()) {
-
             if (session.getAttribute("userProject") == null) {
                 getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
 
             } else {
-
                 List<String> personRequest = Stream.of(request.getParameter("surname"),
                         request.getParameter("name"),
                         request.getParameter("patronymic"),
@@ -60,9 +58,9 @@ public class FindPersonServlet extends HttpServlet {
                 FindPerson findPerson = new FindPerson();
                 Map<Person, List<Car>> personMap = null;
 
-
                 personMap = findPerson.findPersonInDB(personRequest);
                 session.setAttribute("personList", personMap);
+
 
 
                 pw.println("<!DOCTYPE html");
@@ -76,15 +74,14 @@ public class FindPersonServlet extends HttpServlet {
                 pw.println("</div></body></html>");
             }
 
+
+
         } catch (IOException e) {
             e.printStackTrace();
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-
         }
     }
 }
