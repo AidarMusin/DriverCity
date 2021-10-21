@@ -30,13 +30,9 @@ public class FindPerson {
         while (count < 5) {
             preparedStatement.setString(count + 1, personRequest.get(count) + plug);
             count ++;
-
-
         }
 
-
         ResultSet resultSet = preparedStatement.executeQuery();
-
 
         while (resultSet.next()) {
             int idPerson = resultSet.getInt("id");
@@ -46,7 +42,6 @@ public class FindPerson {
             String cityPerson = resultSet.getString("city_name");
             String carPerson = resultSet.getString("car_name");
 
-            logger.info("query: - {}{}", surnamePerson, namePerson);
             addPersonInMap(personMap, new Person(idPerson, surnamePerson, namePerson, patrPerson, cityPerson), new Car(carPerson));
         }
 

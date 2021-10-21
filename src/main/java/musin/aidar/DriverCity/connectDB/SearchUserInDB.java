@@ -33,13 +33,18 @@ public class SearchUserInDB {
 
     public boolean findUser(String loginUser, String passUser)  throws ClassNotFoundException, SQLException {
 
+        logger.info("User {} has attempted to log in.", loginUser);
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, loginUser);
         preparedStatement.setString(2, passUser);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         boolean checkPerson = resultSet.next();
-        logger.info("is true: ");
+        if (checkPerson) {
+            logger.info("Access received.");
+        } else {
+            logger.info("Access denied.");
+        }
 
         preparedStatement.close();
         return checkPerson;

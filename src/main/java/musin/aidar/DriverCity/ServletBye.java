@@ -33,7 +33,7 @@ public class ServletBye extends HttpServlet {
             getServletContext().getRequestDispatcher("/bye.jsp").forward(request, response);
 
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(), e);
         }
     }
 }

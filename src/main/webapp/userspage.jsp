@@ -14,6 +14,8 @@
 <!doctype html>
 <html>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mycss.css">
+
+
 <head>
     <title>FIND</title>
 </head>

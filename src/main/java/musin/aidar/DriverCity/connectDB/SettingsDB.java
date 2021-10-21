@@ -1,5 +1,8 @@
 package musin.aidar.DriverCity.connectDB;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -25,6 +28,7 @@ public class SettingsDB {
             " car_name LIKE ? ; ";
 
     protected static Connection connection;
+    private static final Logger logger = LoggerFactory.getLogger(SettingsDB.class);
 
 
     static {
@@ -43,13 +47,11 @@ public class SettingsDB {
             connection = DriverManager.getConnection(connectionUrl, userName, passw);
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException.getMessage(), sqlException);
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            logger.error(ioException.getMessage(), ioException);
         }
-
     }
-
 }

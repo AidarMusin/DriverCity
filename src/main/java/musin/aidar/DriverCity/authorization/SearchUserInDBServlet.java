@@ -31,9 +31,11 @@ public class SearchUserInDBServlet extends HttpServlet {
                 String userProjectName = request.getParameter("login");
                 String userProjectPass = request.getParameter("pass");
 
+
                 boolean  checkUserProject = searchUserInDB.findUser(userProjectName, userProjectPass);
 
                 if (checkUserProject) {
+                    logger.info("A user with the name  {} has logged in.", userProjectName);
                     userProject = new UserProject(userProjectName, userProjectPass);
                     userProject.setUserProjectId(searchUserInDB.findUserId(userProjectName, userProjectPass));
 
@@ -42,6 +44,7 @@ public class SearchUserInDBServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
 
                 } else {
+                    logger.info("User {} is not found in DB.", userProjectName);
                     String errorUser = "Invalid username and password, please try again";
                     session.setAttribute("errorUser", errorUser);
                     getServletContext().getRequestDispatcher("/userspage.jsp").forward(request, response);
@@ -51,13 +54,12 @@ public class SearchUserInDBServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
 
-
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(sqlException.getMessage(), sqlException);
+        } catch (IOException ioException) {
+            logger.error(ioException.getMessage(), ioException);
         }
     }
 
