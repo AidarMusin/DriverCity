@@ -1,0 +1,39 @@
+22.10.2021 07:52:13.203 [http-nio-8080-exec-9] INFO   m.a.D.c.SearchUserInDB - User sadasdad has attempted to log in.
+22.10.2021 07:52:14.286 [http-nio-8080-exec-9] INFO   m.a.D.c.SearchUserInDB - Access denied.
+22.10.2021 07:52:14.287 [http-nio-8080-exec-9] INFO   m.a.D.a.SearchUserInDBServlet - User sadasdad is not found in DB.
+22.10.2021 07:56:50.713 [http-nio-8080-exec-13] INFO   m.a.D.c.SearchUserInDB - User TEST has attempted to log in.
+22.10.2021 07:56:50.731 [http-nio-8080-exec-13] ERROR  m.a.D.c.SettingsDB - No suitable driver found for jdbc:mysql://remotemysql.com:3306/FTlIGzTWEp
+java.sql.SQLException: No suitable driver found for jdbc:mysql://remotemysql.com:3306/FTlIGzTWEp
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:702)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at musin.aidar.DriverCity.connectDB.SettingsDB.<clinit>(SettingsDB.java:47)
+	at musin.aidar.DriverCity.connectDB.SearchUserInDB.findUser(SearchUserInDB.java:37)
+	at musin.aidar.DriverCity.authorization.SearchUserInDBServlet.doPost(SearchUserInDBServlet.java:35)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:831)
+22.10.2021 07:59:13.021 [http-nio-8080-exec-10] INFO   m.a.D.c.SearchUserInDB - User aidar has attempted to log in.
+22.10.2021 07:59:14.072 [http-nio-8080-exec-10] INFO   m.a.D.c.SearchUserInDB - Access received.
+22.10.2021 07:59:14.072 [http-nio-8080-exec-10] INFO   m.a.D.a.SearchUserInDBServlet - A user with the name  aidar has logged in.
+22.10.2021 07:59:16.263 [http-nio-8080-exec-20] INFO   m.a.D.ServletBye - session close!

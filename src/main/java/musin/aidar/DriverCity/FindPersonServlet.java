@@ -55,7 +55,6 @@ public class FindPersonServlet extends HttpServlet {
                     }
                 }
 
-
                 if (!checkVar) {
                     getServletContext().getRequestDispatcher("/homepage.jsp").forward(request, response);
                 }
@@ -67,12 +66,8 @@ public class FindPersonServlet extends HttpServlet {
                 personMap = findPerson.findPersonInDB(personRequest);
                 session.setAttribute("personList", personMap);
 
-
-
-
                 pw.println("<!DOCTYPE html");
                 pw.println("<html contentType=\"text/html;charset=UTF-8\"><head><title>  Result  </title></head><body><div>");
-
 
                 personMap.forEach((k, v) -> pw.println("<h3>" + k.getName() + " " +
                         k.getSurname() + " - " +
@@ -81,16 +76,12 @@ public class FindPersonServlet extends HttpServlet {
 
                 pw.println("</div></body></html>");
             }
-
-
-
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException ioException) {
+            logger.error(ioException.getMessage());
+        } catch (ClassNotFoundException classNotFoundException) {
+            logger.error(classNotFoundException.getMessage());
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            logger.error(sqlException.getMessage());
         }
     }
 }
