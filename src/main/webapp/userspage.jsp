@@ -11,47 +11,44 @@
         return errorMessage;
     }
 %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mycss.css">
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styleLogin.css">
 
 <head>
     <title>FIND</title>
 </head>
+
 <body>
 
+<form class="login-form" method="POST" action="/user-search" id="checkedForm">
+        <span class="flex-row logo">
+            <h4>Введите имя пользователя</h4>
+        </span>
 
-<br/>
-<div style="text-align: center">
-    <br>
-    <br>
-    <form method="POST" action="/user-search" id="checkedForm">
-            <span>
-                <p> Please, input user name and password </p>
-            </span>
-        <input class="field_av" type="text" id="field_l" name="login" placeholder="userLogin">
-        <br/>
-        <input class="field_av" type="password" id="field_p" name="pass" placeholder="userPass">
-        <br/>
-        <div>
-            <input id="ckb" type="checkbox" name="remember-me">
-            <label> Remember me </label>
-        </div>
-        <div>
-            <p>
-                <button> Login</button>
-            </p>
-        </div>
-    </form>
+    <dv class="flex-row">
+        <input class="lf--input" type="text" id="username" name="login" placeholder="имя пользователя">
+    </dv>
+    <div class="flex-row">
+        <input class="lf--input" type="password" id="password" name="pass" placeholder="пароль">
+    </div>
+    <div>
+        <input id="ckb" type="checkbox" name="remember-me">
+        <label class="lf--checkbox">запомнить меня</label>
+    </div>
+    <div>
+        <input class="lf--submit" type="submit" value="Войти">
+    </div>
+</form>
 
-    <span class="error-user">
+<span class="error-user">
         <%
             String login = request.getParameter("login");
             String errorUser = (String) session.getAttribute("errorUser");
         %>
 
-        <h3 style="color: crimson"><%= sendError(login, errorUser) %> </h3>
+        <h3 style="color: #bc3220"><%= sendError(login, errorUser) %> </h3>
         </span>
 </div>
 </body>

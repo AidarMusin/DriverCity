@@ -20,14 +20,14 @@ p {
     margin: 5px 5px 5px 5px;
 }
 
-.all-div {
-    font-size: 16px;
-    color: #293f62;
-    text-align: left;
-    margin-left: 60px;
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
+/*.all-div {*/
+/*    font-size: 16px;*/
+/*    color: #293f62;*/
+/*    text-align: left;*/
+/*    margin-left: 60px;*/
+/*    margin-top: 15px;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
 .left-profile {
     font-size: 12pt;
@@ -37,7 +37,7 @@ p {
     margin-bottom: 40px;
 }
 
-.input-field {
+.col1-input-field {
     margin-bottom: 20px;
     margin-top: 10px;
 }

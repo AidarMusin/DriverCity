@@ -6,21 +6,17 @@
 <head>
     <title>BYE</title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/bye.css">
-
 </head>
 <body>
-<p>
-<h1 class="bye-text" style="text-align: center">
 
-    <%="До новых встреч"%>
-</h1>
+<form class="bye-form" method="POST" action="/userspage.jsp">
+        <span class="flex-row bye-text">
+            <h4><%="ДО НОВЫХ ВСТРЕЧ"%></h4>
+        </span>
 
-<form method="post" action="/userspage.jsp">
-    <div class="bye" style="text-align: center">
-        <button> Пока</button>
+    <div>
+        <input class="bye--submit" type="submit" value="Пока">
     </div>
-
-    </p>
 </form>
 
 </body>
